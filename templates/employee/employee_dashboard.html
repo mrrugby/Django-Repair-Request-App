@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+   
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold text-primary display-5">Employee Dashboard</h5>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger rounded-pill">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+        </form>
+    </div>
+
+
+    <h5 class="text-muted mb-4">Welcome back, <span class="fw-bold text-success">{{ user.username }}</span>!</h5>
+
+    <div class="row justify-content-center">
+     
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Create a New Request</h5>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'create_repair_request' %}" class="btn btn-primary btn-lg w-100">Create New Repair Request</a>
+                </div>
+            </div>
+        </div>
+
+      
+        <div class="col-lg-6 col-md-8">
+            <div class="row">
+           
+                <div class="col-12 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Request Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">Pending: <span class="badge bg-warning">{{ pending_count }}</span></li>
+                                <li class="list-group-item">Rejected: <span class="badge bg-danger">{{ rejected_count }}</span></li>
+                                <li class="list-group-item">Completed: <span class="badge bg-success">{{ completed_count }}</span></li>
+                                <li class="list-group-item">In Progress: <span class="badge bg-info">{{ in_progress_count }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="mb-0">Recent Requests</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for request in recent_requests %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'view_repair_request' request.id %}" class="text-decoration-none">
+                                        <strong>Request #{{ request.id }}</strong> - Status: {{ request.status }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

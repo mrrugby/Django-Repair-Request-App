@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<div class="container my-4">
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1 class="display-4">Request #{{ repair_request.id }}</h1>
+            <p class="lead">Submitted on: {{ repair_request.created_at }}</p>
+        </div>
+    </div>
+
+ 
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Request Details</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Description:</strong> {{ repair_request.description }}</p>
+                    <p><strong>Status:</strong> {{ repair_request.status }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Status History</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for status in status_history %}
+                            <li class="list-group-item">
+                                <strong>{{ status.updated_at }}:</strong> {{ status.status }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{% url 'employee_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Dashboard -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold">Technician Dashboard</h4>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+
+    <h5>logged in as: <strong class="card-title text-primary" >{{ request.user.username }}</strong></h5>
+    <p class="text-muted">Here are your assigned repair requests:</p>
+
+    {% if repair_requests %}
+        <div class="row g-4">
+            {% for request in repair_requests %}
+                <div class="col-md-6">
+                    <div class="card repair-card shadow-sm border-0 h-100">
+                        <div class="row g-0">
+                            <!-- Image Section -->
+                            <div class="col-4">
+                                {% if request.image %}
+                                    <img src="{{ request.image.url }}" alt="Repair Image" class="img-fluid rounded-start" style="height: 100%; object-fit: cover;">
+                                {% else %}
+                                    <div class="d-flex align-items-center justify-content-center h-100 bg-light text-muted rounded-start" style="height: 100px;">
+                                        No Image
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <!-- Info Section -->
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5>Employee: <strong class="card-title text-primary">{{ request.employee.user.username }}</strong></h5>
+                                    <p class="card-text text-muted mb-1">
+                                        {{ request.description|truncatewords:9 }}
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-success">Status: {{ request.get_status_display }}</small><br>
+                                        <small class="text-muted">Posted: {{ request.created_at }}</small>
+                                    </p>
+                                    <a href="{% url 'update_task_status' request.id request.employee.user.username %}" class="btn btn-primary btn-sm">
+                                        Update Status
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning mt-4" role="alert">
+            No repair requests assigned to you at the moment.
+        </div>
+    {% endif %}
+</div>
+
+<style>
+   
+    .repair-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .repair-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+</style>
+{% endblock %}
