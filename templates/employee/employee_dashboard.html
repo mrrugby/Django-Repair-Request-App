@@ -4,13 +4,11 @@
 {% block content %}
 <div class="container mt-4">
    
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h5 class="fw-bold text-primary display-5">Employee Dashboard</h5>
+     <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold">Employee Dashboard</h4>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger rounded-pill">
-                <i class="bi bi-box-arrow-right"></i> Logout
-            </button>
+            <button type="submit" class="btn btn-danger">Logout</button>
         </form>
     </div>
 
@@ -61,10 +59,11 @@
                                 {% for request in recent_requests %}
                                 <li class="list-group-item">
                                     <a href="{% url 'view_repair_request' request.id %}" class="text-decoration-none">
-                                        <strong>Request #{{ request.id }}</strong> - Status: {{ request.status }}
+                                        <strong>Request #{{ request.id }}</strong> - Status: {{ request.get_status_display }}
                                     </a>
                                 </li>
                                 {% endfor %}
+                                
                             </ul>
                         </div>
                     </div>

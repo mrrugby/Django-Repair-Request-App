@@ -26,8 +26,6 @@ def employee_dashboard(request):
     
 
     user_requests = RepairRequest.objects.filter(employee=request.user.employee)
-
-    
     recent_requests = RepairRequest.objects.filter(employee=request.user.employee).order_by('-created_at')
     
     

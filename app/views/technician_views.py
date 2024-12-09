@@ -61,7 +61,7 @@ def technician_add_comment(request, repair_request_id):
     repair_request = get_object_or_404(RepairRequest, id=repair_request_id)
     
     if not hasattr(request.user, 'technician'):
-        return HttpResponseForbidden("Onlt technicians can comment on this")
+        return HttpResponseForbidden("Only technicians can comment on this")
     
     return handle_comment_logic(request, repair_request)
 

@@ -35,7 +35,8 @@
                     <span class="badge 
                     {% if repair_request.status == 'COMPLETED' %}
                     bg-success
-                    {% elif repair_request.status == 'IN_PROGRESS' %}bg-warning text-dark
+                    {% elif repair_request.status == 'IN_PROGRESS' %}
+                    bg-warning text-dark
                     {% elif repair_request.status == 'REJECTED' %}
                     bg-danger
                     {% else %}
