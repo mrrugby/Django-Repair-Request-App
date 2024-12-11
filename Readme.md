@@ -112,20 +112,10 @@ Each app follows the Django MVC (Model-View-Controller) architecture.
 
 ---
 
-## 📊 Key Screenshots (Optional)
-
-Include screenshots of the following:
-- Login/Registration Page
-- User Dashboard
-- Technician Dashboard
-- Admin Panel
-- Repair Request Submission Form
-
----
 
 ## ✨ Contribution Guidelines
 
-We welcome contributions! Please follow these steps:
+I'd like contributions! Please follow these steps:
 
 1. Fork the repository and clone it locally.
 2. Create a new feature branch:
