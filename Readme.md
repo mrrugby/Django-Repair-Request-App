@@ -105,8 +105,8 @@ CouncilCare is a Django-based web application designed to streamline IT repair r
 ## 🧩 App Structure
 
 The project is organized into two main apps:  
-1. **Accounts** - Handles user authentication and role-based access.
-2. **CareApp** - Manages IT repair requests and their workflows.
+1. **app** - Core functionality of the system
+2. **councilcare** - project settings.py
 
 Each app follows the Django MVC (Model-View-Controller) architecture.
 
